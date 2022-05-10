@@ -57,6 +57,9 @@ Description : The Software Engineers' role is to develop programmatic aspects of
 
 Autonomous Vehicle Challenge project
 
+# Project Design
+The main project is split into three sections: Core, Completion, Challenge. Each section will have its own method and the program will switch to the next method once the first one meets the designated colour (red, green or blue) which marks the end of the section (and the start of the next one). Each section will have its own way of navigating through the maze, and will use some universal methods such as turning, moving forward, what to do in the case of 'getting lost' (losing the black line of the maze), etc.
+
 ## Getting started
 
 To make it easy for you to get started with GitLab, here's a list of recommended next steps.
