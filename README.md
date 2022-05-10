@@ -25,20 +25,16 @@ Description : The Software Engineers' role is to develop programmatic aspects of
 |15/05/2022   | tune basic movement                         | Alex                    | 2                |             |
 |16/05/2022   | code colour pixel detection                 | Ev                      | 1                |             |
 |15/05/2022   | tune recovery system                        | Alex                    | 2                |             |
+|17/05/2022   | Code for core movement                      | Ev                      | 2                |             |
 | ----------- | ------------------------------------------- | ----------------------- | ---------------- | ----------- |
 
 #Comlpetion
-| Start Date  | Task Description                 | Responsible Team Member | days to complete | Outcome 
+| Start Date  | Task Description                 | Responsible Team Member | days to complete | Outcome     |
 | ----------- | ---------------------------------| ------------------------|-------------     | ----------- | 
-|13/05/2022   | skeleton code for basic movement | Ev                      | 2                |
-|15/05/2022   | skeleton code for detect line    | Anothony                | 2                | 
-|18/05/2022   | tune line detection              | Alex                    | 1                |             |
-|18/05/2022   | tune basic movement              | Alex                    | 1                | 
-|             | code colour pixel detection                                |                  |
-|             |                                  |                         |                  |
-|             |                    |                         |             |
-|             |                    |                         |             |
-| ----------- | -------------------| ------------------------| ----------- |
+|13/05/2022   | code for completion movement     | Ev                      | 4                |             |
+|18/05/2022   | code colour pixel detection      | Anthony                 | 1                |             |
+|             | intersection detection           |                         |                  |             |
+| ----------- | ---------------------------------| ------------------------| ----------- |
 
 #Challenge
 | Start Date  | Task Description                 | Responsible Team Member | days to complete | Outcome 
