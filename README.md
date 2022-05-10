@@ -4,19 +4,19 @@ Team 16 Members
 - Evgeny Zhilkin - zhilkievge@myvuw.ac.nz
 
 Software Architect : Ev
-Description : The Software Architect's role is to develop the main functionality of the program. They are responsible for building the skeleton of the program, requesting specific functions of the Project Designer to be developed, and generally the bulk of the working code.
+- Description : The Software Architect's role is to develop the main functionality of the program. They are responsible for building the skeleton of the program, requesting specific functions of the Project Designer to be developed, and generally the bulk of the working code.
 
-Project Designer : Alex
+- Project Designer : Alex
 Description : The Project Designer's role is to ensure the program runs as expected and is legible. They will comment and format code, find the best values to use for different functions and constants, test the program, and designing the project specifications. 
 
 Project Manager : Anthony
-Description : The Project Manager's role is to maintain the project's timeline and ensure that segments of the project are completed on time. They will approve merge requests, chase up any aspects of the plan that are lagging behind the alloted time, ensure communication and delivery of the project, and help in places when required.
+- Description : The Project Manager's role is to maintain the project's timeline and ensure that segments of the project are completed on time. They will approve merge requests, chase up any aspects of the plan that are lagging behind the alloted time, ensure communication and delivery of the project, and help in places when required.
 
 Software Engineer : Alex, Anthony and Ev
-Description : The Software Engineers' role is to develop programmatic aspects of the project. This includes developing sub-programs and functions called by the main program and testing when required.
+- Description : The Software Engineers' role is to develop programmatic aspects of the project. This includes developing sub-programs and functions called by the main program and testing when required.
 
 
-#CORE
+# Core
 | Start Date  | Task Description                            | Responsible Team Member | days to complete | Outcome     |
 | ----------- | ------------------------------------------- | ----------------------- | ---------------- | ----------- | 
 |13/05/2022   | skeleton code for basic movement            | Ev                      | 3                |             |
@@ -27,7 +27,7 @@ Description : The Software Engineers' role is to develop programmatic aspects of
 |15/05/2022   | tune recovery system                        | Alex                    | 2                |             |
 | ----------- | ------------------------------------------- | ----------------------- | ---------------- | ----------- |
 
-#Comlpetion
+# Completion
 | Start Date  | Task Description                 | Responsible Team Member | days to complete | Outcome 
 | ----------- | ---------------------------------| ------------------------|-------------     | ----------- | 
 |13/05/2022   | skeleton code for basic movement | Ev                      | 2                |
@@ -40,7 +40,7 @@ Description : The Software Engineers' role is to develop programmatic aspects of
 |             |                    |                         |             |
 | ----------- | -------------------| ------------------------| ----------- |
 
-#Challenge
+# Challenge
 | Start Date  | Task Description                 | Responsible Team Member | days to complete | Outcome 
 | ----------- | ---------------------------------| ------------------------|-------------     | ----------- | 
 |13/05/2022   | skeleton code for basic movement | Ev                      | 2                |
