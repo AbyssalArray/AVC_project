@@ -21,6 +21,7 @@ Software Engineer : Alex, Anthony and Ev
 | ----------- | ------------------------------------------- | ----------------------- | ---------------- | ----------- | 
 |13/05/2022   | skeleton code for basic movement            | Ev                      | 3                |             |
 |13/05/2022   | detect line                                 | Anthony                 | 1                |             |
+|14/05/2022   | detect offset                               | Ev                      | 2                |             |
 |14/05/2022   | skeleton recovery system                    | Ev                      | 1                |             |
 |15/05/2022   | tune basic movement                         | Alex                    | 2                |             |
 |16/05/2022   | code colour pixel detection                 | Ev                      | 1                |             |
@@ -31,23 +32,19 @@ Software Engineer : Alex, Anthony and Ev
 #Comlpetion
 | Start Date  | Task Description                 | Responsible Team Member | days to complete | Outcome     |
 | ----------- | ---------------------------------| ------------------------|-------------     | ----------- | 
-|13/05/2022   | code for completion movement     | Ev                      | 4                |             |
+|20/05/2022   | code for completion movement     | Ev                      | 4                |             |
 |18/05/2022   | code colour pixel detection      | Anthony                 | 1                |             |
-|             | intersection detection           |                         |                  |             |
-| ----------- | ---------------------------------| ------------------------| ----------- |
+|20/05/2022   | intersection detection           |                         | 5                |             |
+|25/05/2022   | intersection turning code        | Ev                      | 2                |             |
+| ----------- | ---------------------------------| ------------------------| ---------------- | ----------- |
 
 # Challenge
 | Start Date  | Task Description                 | Responsible Team Member | days to complete | Outcome 
 | ----------- | ---------------------------------| ------------------------|-------------     | ----------- | 
-|13/05/2022   | skeleton code for basic movement | Ev                      | 2                |
-|15/05/2022   | skeleton code for detect line    | Anothony                | 2                | 
-|18/05/2022   | tune line detection              | Alex                    | 1                |             |
-|18/05/2022   | tune basic movement              | Alex                    | 1                | 
-|             | code colour pixel detection                                |                  |
-|             |                                  |                         |                  |
-|             |                    |                         |             |
-|             |                    |                         |             |
-| ----------- | -------------------| ------------------------| ----------- |
+|18/05/2022   | detect challenge start           | Alex                    | 1                |             |
+|13/05/2022   | turn counter                     | Ev                      | 2                |             |
+|15/05/2022   | finish detector                  | Anothony                | 2                |             |
+| ----------- | -------------------------------- | ----------------------- | ---------------- | ----------- |
 
 # AVC
 
