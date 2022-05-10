@@ -1,6 +1,31 @@
+Team 16 Members
+- Alex Fausett - fausetalex@myvuw.ac.nz
+- Anthony Kendrew - kendreanth@myvuw.ac.nz
+- Evgeny Zhilkin - zhilkievge@myvuw.ac.nz
+
+Software Architect : Ev
+
+Project Designer : Alex 
+
+Project Manager : Anthony
+
+Software Engineer : Alex, Anthony and Ev
+
+| Start Date  | Task Description | Responsible Team Member | Outcome     | 
+| ----------- | -----------------| ------------------------| ----------- | 
+| Header      | Title            | Header                  | Title       |
+| Paragraph   | Text             | Paragraph               | Text        |
+|             |                  |                         |             |
+|             |                  |                         |             | 
+|             |                  |                         |             |
+|             |                  |                         |             |
+|             |                  |                         |
+| ----------- | -----------------| ------------------------| ----------- |
+
+
 # AVC
 
-
+Autonomous Vehicle Challenge project
 
 ## Getting started
 
@@ -15,14 +40,14 @@ Already a pro? Just edit this README.md and make it your own. Want to make it ea
 
 ```
 cd existing_repo
-git remote add origin https://gitlab.ecs.vuw.ac.nz/course-work/engr101/2022/project3/t16/avc.git
+git remote add origin https://gitlab.ecs.vuw.ac.nz/Team16/avc.git
 git branch -M main
 git push -uf origin main
 ```
 
 ## Integrate with your tools
 
-- [ ] [Set up project integrations](https://gitlab.ecs.vuw.ac.nz/course-work/engr101/2022/project3/t16/avc/-/settings/integrations)
+- [ ] [Set up project integrations](https://gitlab.ecs.vuw.ac.nz/Team16/avc/-/settings/integrations)
 
 ## Collaborate with your team
 
