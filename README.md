@@ -44,21 +44,23 @@ The main project is split into three sections: Core, Completion, Challenge. Each
 
 
 ## Completion
-| Start Date  | Task Description                 | Responsible Team Member | days to complete | Outcome     |
-| ----------- | ---------------------------------| ------------------------|-------------     | ----------- | 
-|20/05/2022   | code for completion movement     | Ev                      | 4                |             |
-|18/05/2022   | code colour pixel detection      | Anthony                 | 1                |             |
-|20/05/2022   | intersection detection           |                         | 5                |             |
-|25/05/2022   | intersection turning code        | Ev                      | 2                |             |
-| ----------- | ---------------------------------| ------------------------| ---------------- | ----------- |
+| **Start Date** | **Task Description**                                                   | **Responsible Team Member** | **End Date** | **Outcome** |
+| -------------- | ---------------------------------------------------------------------- | --------------------------- | ------------ | ----------- |
+| 23/5           | Create a method to detect an intersection                              | Ev                          | 25/5         |             |
+| 25/5           | Develop response to an intersection being detected (turning movements) | Ev                          | 27/5         |             |
+| 26/5           | Code the main function for completion                                  | Ev                          | 27/5         |             |
+| 25/5           | Tune and test intersection method                                      | Alex                        | 26/5         |             |
+| 26/5           | Test the completion method                                             | Alex                        | 27/5         |             |
+| 27/5           | Add blue colour detection and switch to challenge method               | Anthony                     | 29/5         |             |
 
 ## Challenge
-| Start Date  | Task Description                 | Responsible Team Member | days to complete | Outcome 
-| ----------- | ---------------------------------| ------------------------|-------------     | ----------- | 
-|18/05/2022   | detect challenge start           | Alex                    | 1                |             |
-|13/05/2022   | turn counter                     | Ev                      | 2                |             |
-|15/05/2022   | finish detector                  | Anothony                | 2                |             |
-| ----------- | -------------------------------- | ----------------------- | ---------------- | ----------- |
+| **Start Date** | **Task Description**                                        | **Responsible Team Member** | **End Date** | **Outcome** |
+| -------------- | ----------------------------------------------------------- | --------------------------- | ------------ | ----------- |
+| 27/5           | Develop a turn counter and methodology for turning          | Ev                          | 31/5         |             |
+| 30/5           | Add green colour detection for the end of challenge         | Anthony                     | 1/6          |             |
+| 31/5           | Tune any further movements as required                      | Alex                        | 2/6          |             |
+| 31/5           | Extensive testing from beginning to end (core to challenge) | Alex                        | 2/6          |             |
+| 31/5           | Fix any bugs from testing                                   | Alex                        | 2/6          |             |
 
 
 # Default
