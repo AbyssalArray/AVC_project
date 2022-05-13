@@ -2,7 +2,7 @@
 
 Autonomous Vehicle Challenge project
 
-# Team Members and Contact Information
+## Team Members and Contact Information
 - Alex Fausett - fausetalex@myvuw.ac.nz
 - Anthony Kendrew - kendreanth@myvuw.ac.nz
 - Evgeny Zhilkin - zhilkievge@myvuw.ac.nz
@@ -26,17 +26,22 @@ The main project is split into three sections: Core, Completion, Challenge. Each
 # Planning
 
 ## Core
-| Start Date  | Task Description                            | Responsible Team Member | days to complete | Outcome     |
-| ----------- | ------------------------------------------- | ----------------------- | ---------------- | ----------- | 
-|13/05/2022   | skeleton code for basic movement            | Ev                      | 3                |             |
-|13/05/2022   | detect line                                 | Anthony                 | 1                |             |
-|14/05/2022   | detect offset                               | Ev                      | 2                |             |
-|14/05/2022   | skeleton recovery system                    | Ev                      | 1                |             |
-|15/05/2022   | tune basic movement                         | Alex                    | 2                |             |
-|16/05/2022   | code colour pixel detection                 | Ev                      | 1                |             |
-|15/05/2022   | tune recovery system                        | Alex                    | 2                |             |
-|17/05/2022   | Code for core movement                      | Ev                      | 2                |             |
-| ----------- | ------------------------------------------- | ----------------------- | ---------------- | ----------- |
+| **Start Date** | **Task Description**                                                      | **Responsible Team Member** | **End Date** | **Outcome** |
+| -------------- | ------------------------------------------------------------------------- | --------------------------- | ------------ | ----------- |
+| 13/5           | Construct skeleton code for the main() method                             | Anthony                     | 15/5         |             |
+| 13/5           | Create UML Class diagrams                                                 | Anthony                     | 15/5         |             |
+| 14/5           | Set up classes for Camera, Robot, Motor etc. using diagrams               | Anthony                     | 15/5         |             |
+| 14/5           | Create constants                                                          | Alex                        | 15/5         |             |
+| 13/5           | Develop code for basic movements (forward, backward, turn left and right) | Ev                          | 18/5         |             |
+| 16/5           | Develop method to detect line using the robot camera                      | Anthony                     | 18/5         |             |
+| 16/5           | Detect offset (error) or how far from centre the line is                  | Alex                        | 18/5         |             |
+| 19/5           | Code the main function for core                                           | Ev                          | 20/5         |             |
+| 19/5           | Tune basic movements in relation to the offset                            | Alex                        | 20/5         |             |
+| 21/5           | Create the recovery system (when the line is lost)                        | Ev                          | 22/5         |             |
+| 21/5           | Tune and test recovery system                                             | Alex                        | 23/5         |             |
+| 24/5           | Test the core method                                                      | Alex                        | 25/5         |             |
+| 23/5           | Add red colour detection and switch to completion method                  | Anthony                     | 25/5         |             |
+
 
 ## Completion
 | Start Date  | Task Description                 | Responsible Team Member | days to complete | Outcome     |
@@ -56,8 +61,7 @@ The main project is split into three sections: Core, Completion, Challenge. Each
 | ----------- | -------------------------------- | ----------------------- | ---------------- | ----------- |
 
 
-
-# Defaults
+# Default
 
 ## Getting started
 
