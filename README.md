@@ -1,8 +1,13 @@
-Team 16 Members
+# AVC
+
+Autonomous Vehicle Challenge project
+
+# Team 16 Members
 - Alex Fausett - fausetalex@myvuw.ac.nz
 - Anthony Kendrew - kendreanth@myvuw.ac.nz
 - Evgeny Zhilkin - zhilkievge@myvuw.ac.nz
 
+# Role Descriptions
 Software Architect : Ev
 - Description : The Software Architect's role is to develop the main functionality of the program. They are responsible for building the skeleton of the program, requesting specific functions of the Project Designer to be developed, and generally the bulk of the working code.
 
@@ -15,8 +20,12 @@ Project Manager : Anthony
 Software Engineer : Alex, Anthony and Ev
 - Description : The Software Engineers' role is to develop programmatic aspects of the project. This includes developing sub-programs and functions called by the main program and testing when required.
 
+# Project Design
+The main project is split into three sections: Core, Completion, Challenge. Each section will have its own method and the program will switch to the next method once the first one meets the designated colour (red, green or blue) which marks the end of the section (and the start of the next one). Each section will have its own way of navigating through the maze, and will use some universal methods such as turning, moving forward, what to do in the case of 'getting lost' (losing the black line of the maze), etc.
 
-# Core
+# Planning
+
+## Core
 | Start Date  | Task Description                            | Responsible Team Member | days to complete | Outcome     |
 | ----------- | ------------------------------------------- | ----------------------- | ---------------- | ----------- | 
 |13/05/2022   | skeleton code for basic movement            | Ev                      | 3                |             |
@@ -29,7 +38,7 @@ Software Engineer : Alex, Anthony and Ev
 |17/05/2022   | Code for core movement                      | Ev                      | 2                |             |
 | ----------- | ------------------------------------------- | ----------------------- | ---------------- | ----------- |
 
-#Comlpetion
+## Completion
 | Start Date  | Task Description                 | Responsible Team Member | days to complete | Outcome     |
 | ----------- | ---------------------------------| ------------------------|-------------     | ----------- | 
 |20/05/2022   | code for completion movement     | Ev                      | 4                |             |
@@ -38,7 +47,7 @@ Software Engineer : Alex, Anthony and Ev
 |25/05/2022   | intersection turning code        | Ev                      | 2                |             |
 | ----------- | ---------------------------------| ------------------------| ---------------- | ----------- |
 
-# Challenge
+## Challenge
 | Start Date  | Task Description                 | Responsible Team Member | days to complete | Outcome 
 | ----------- | ---------------------------------| ------------------------|-------------     | ----------- | 
 |18/05/2022   | detect challenge start           | Alex                    | 1                |             |
@@ -46,18 +55,17 @@ Software Engineer : Alex, Anthony and Ev
 |15/05/2022   | finish detector                  | Anothony                | 2                |             |
 | ----------- | -------------------------------- | ----------------------- | ---------------- | ----------- |
 
-# AVC
 
-Autonomous Vehicle Challenge project
 
-# Project Design
-The main project is split into three sections: Core, Completion, Challenge. Each section will have its own method and the program will switch to the next method once the first one meets the designated colour (red, green or blue) which marks the end of the section (and the start of the next one). Each section will have its own way of navigating through the maze, and will use some universal methods such as turning, moving forward, what to do in the case of 'getting lost' (losing the black line of the maze), etc.
+
 
 ## Getting started
 
 To make it easy for you to get started with GitLab, here's a list of recommended next steps.
 
 Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
+
+
 
 ## Add your files
 
