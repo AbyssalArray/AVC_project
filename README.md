@@ -26,7 +26,6 @@ The main project is split into three sections: Core, Completion, Challenge. Each
 # Planning
 
 ## Core
-* - means needs improvement
 | **Start Date** | **Task Description**                                                      | **Responsible Team Member** | **End Date** | **Outcome** |
 | -------------- | ------------------------------------------------------------------------- | --------------------------- | ------------ | ----------- |
 | 13/5           | Construct skeleton code for the main() method                             | Anthony                     | 15/5         |             |
