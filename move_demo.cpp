@@ -1,4 +1,3 @@
-
 #include "images.h" 
 int prevLeftVel = 0;
 int prevRightVel = 0;
@@ -55,10 +54,16 @@ int turning_move(int error,int prevError, int f_vel, int step) {
 int core() {
 	int i = 0;
 	while(!detectRed()) {
-		int[] error = readPixels();
-		turning_move(error[0], error[1], 10, i);
-		update_sim(1500);
-		i++;
+		if (detectLine()) {
+			int[] error = readPixels();
+			turning_move(error[0], error[1], 10, i);
+			update_sim(1500);
+			i++;
+		}
+		else {
+			i = 0;
+			turning_move(0, 0, -10, i);
+		}
 		
 	}
 	return 0;
