@@ -45,7 +45,7 @@ int turning_move(int error,int prevError, int f_vel, int step) {
 	const double propGain = 1;
 	const double derivGain = 1;
 	// first step is just forward
-	if (step == 0) set_vel(20, 0);
+	if (step == 0) set_vel(f_vel, 0);
 	else {
 		int velDiff = error * propGain + (error - prevError) * derivGain;
 		set_vel(forwardVel, velDiff);
@@ -53,6 +53,14 @@ int turning_move(int error,int prevError, int f_vel, int step) {
 	return 0;
 } 
 int core() {
+	int i = 0;
+	while(!detectRed()) {
+		int[] error = readPixels();
+		turning_move(error[0], error[1], 10, i);
+		update_sim(1500);
+		i++;
+		
+	}
 	return 0;
 }
 int main()
