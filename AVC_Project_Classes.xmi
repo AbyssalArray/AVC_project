@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<XMI verified="false" xmi.version="1.2" timestamp="2022-05-19T19:33:42" xmlns:UML="http://schema.omg.org/spec/UML/1.4">
+<XMI verified="false" xmi.version="1.2" timestamp="2022-05-19T19:44:21" xmlns:UML="http://schema.omg.org/spec/UML/1.4">
  <XMI.header>
   <XMI.documentation>
    <XMI.exporter>umbrello uml modeller http://umbrello.kde.org</XMI.exporter>
@@ -41,8 +41,10 @@
         <UML:Attribute visibility="private" isSpecification="false" ownerScope="classifier" xmi.id="uX3zfjAFDYXkZ" type="uu5o8cOMdu7S8" initialValue="40" name="MAX_V"/>
         <UML:Attribute visibility="private" isSpecification="false" xmi.id="umJF0uN6AWdk2" type="uu5o8cOMdu7S8" name="leftV"/>
         <UML:Attribute visibility="private" isSpecification="false" xmi.id="uMFCtQqtI93Jv" type="uu5o8cOMdu7S8" name="rightV"/>
+        <UML:Attribute visibility="private" isSpecification="false" xmi.id="uIMOwHhdqEfuT" type="uu5o8cOMdu7S8" name="forwardV"/>
         <UML:Attribute visibility="private" isSpecification="false" xmi.id="uLDbMPLKYbM6F" type="uu5o8cOMdu7S8" name="previousLeftV"/>
         <UML:Attribute visibility="private" isSpecification="false" xmi.id="uskOUuw0LVTn2" type="uu5o8cOMdu7S8" name="previousRightV"/>
+        <UML:Attribute visibility="private" isSpecification="false" xmi.id="uknDG7iZTnAC2" type="usK56d47Wt5GG" name="currentImage"/>
         <UML:Operation visibility="public" isSpecification="false" isQuery="false" isAbstract="false" isLeaf="false" isRoot="false" xmi.id="uJ5OHHCK8YXS0" isOverride="false" name="get_velocity" isInline="false" isVirtual="false">
          <UML:BehavioralFeature.parameter>
           <UML:Parameter kind="return" xmi.id="ueibT924dPLf6" type="uu5o8cOMdu7S8"/>
@@ -62,19 +64,10 @@
           <UML:Parameter visibility="private" isSpecification="false" xmi.id="uyvbEwJvDulwX" type="uu5o8cOMdu7S8" value="" name="step"/>
          </UML:BehavioralFeature.parameter>
         </UML:Operation>
-        <UML:Operation visibility="public" isSpecification="false" isQuery="false" isAbstract="false" isLeaf="false" isRoot="false" xmi.id="ut9L0yqKzTbx7" isOverride="false" name="detect_red" isInline="false" isVirtual="false">
+        <UML:Operation visibility="public" isSpecification="false" isQuery="false" isAbstract="false" isLeaf="false" isRoot="false" xmi.id="ut9L0yqKzTbx7" isOverride="false" name="is_colour" isInline="false" isVirtual="false">
          <UML:BehavioralFeature.parameter>
           <UML:Parameter kind="return" xmi.id="ukmjHNLDQykpf" type="u40N25FUIFTNU"/>
-         </UML:BehavioralFeature.parameter>
-        </UML:Operation>
-        <UML:Operation visibility="public" isSpecification="false" isQuery="false" isAbstract="false" isLeaf="false" isRoot="false" xmi.id="unKHrP7adrfrb" isOverride="false" name="detect_green" isInline="false" isVirtual="false">
-         <UML:BehavioralFeature.parameter>
-          <UML:Parameter kind="return" xmi.id="uSwijixp9CUoX" type="u40N25FUIFTNU"/>
-         </UML:BehavioralFeature.parameter>
-        </UML:Operation>
-        <UML:Operation visibility="public" isSpecification="false" isQuery="false" isAbstract="false" isLeaf="false" isRoot="false" xmi.id="uFrAuaNrw6wK9" isOverride="false" name="detect_blue" isInline="false" isVirtual="false">
-         <UML:BehavioralFeature.parameter>
-          <UML:Parameter kind="return" xmi.id="uhmynYMMurWhr" type="u40N25FUIFTNU"/>
+          <UML:Parameter visibility="private" isSpecification="false" xmi.id="uUKgR7HqPKFl3" type="uHK7NamaQiiJL" value="" name="colour"/>
          </UML:BehavioralFeature.parameter>
         </UML:Operation>
         <UML:Operation visibility="public" isSpecification="false" isQuery="false" isAbstract="false" isLeaf="false" isRoot="false" xmi.id="ug40cnBka6r4a" isOverride="false" name="detect_line" isInline="false" isVirtual="false">
@@ -84,12 +77,13 @@
         </UML:Operation>
        </UML:Classifier.feature>
       </UML:Class>
+      <UML:Class visibility="public" isSpecification="false" namespace="Logical_View" isAbstract="false" isLeaf="false" isRoot="false" xmi.id="usK56d47Wt5GG" name="vector"/>
      </UML:Namespace.ownedElement>
      <XMI.extension xmi.extender="umbrello">
       <diagrams resolution="96">
-       <diagram showopsig="1" linecolor="#ff0000" snapx="25" showattribassocs="1" snapy="25" linewidth="0" showattsig="1" textcolor="#000000" isopen="1" showpackage="1" showpubliconly="0" showstereotype="1" name="class diagram" font="Sans Serif,9,-1,0,50,0,0,0,0,0" canvasheight="195" canvaswidth="381" localid="-1" snapcsgrid="0" showgrid="0" showops="1" griddotcolor="#d3d3d3" backgroundcolor="#ffffff" usefillcolor="1" fillcolor="#ffff00" zoom="378.0718336483932" xmi.id="uYF4f46pmuZZ1" documentation="" showscope="1" snapgrid="0" showatts="1" type="1">
+       <diagram showopsig="1" linecolor="#ff0000" snapx="25" showattribassocs="1" snapy="25" linewidth="0" showattsig="1" textcolor="#000000" isopen="1" showpackage="1" showpubliconly="0" showstereotype="1" name="class diagram" font="Sans Serif,9,-1,0,50,0,0,0,0,0" canvasheight="195" canvaswidth="381" localid="-1" snapcsgrid="0" showgrid="0" showops="1" griddotcolor="#d3d3d3" backgroundcolor="#ffffff" usefillcolor="1" fillcolor="#ffff00" zoom="398.2608695652174" xmi.id="uYF4f46pmuZZ1" documentation="" showscope="1" snapgrid="0" showatts="1" type="1">
         <widgets>
-         <classwidget linecolor="#ff0000" usesdiagramfillcolor="0" linewidth="0" textcolor="#000000" showoperations="1" usesdiagramusefillcolor="0" showpubliconly="0" showpackage="1" x="-4729.8" showattsigs="601" showstereotype="1" y="-5760.8" showattributes="1" font="Sans Serif,9,-1,0,50,0,0,0,0,0" localid="uK00KyM3ZVc1Q" width="381" isinstance="0" usefillcolor="1" fillcolor="#ffff00" xmi.id="us9i6OhqMGgmX" autoresize="1" showscope="1" height="195" showopsigs="601"/>
+         <classwidget linecolor="#ff0000" usesdiagramfillcolor="0" linewidth="0" textcolor="#000000" showoperations="1" usesdiagramusefillcolor="0" showpubliconly="0" showpackage="1" x="-4729.8" showattsigs="601" showstereotype="1" y="-5760.8" showattributes="1" font="Sans Serif,9,-1,0,50,0,0,0,0,0" localid="uK00KyM3ZVc1Q" width="381" isinstance="0" usefillcolor="1" fillcolor="#ffff00" xmi.id="us9i6OhqMGgmX" autoresize="0" showscope="1" height="195" showopsigs="601"/>
         </widgets>
         <messages/>
         <associations/>
@@ -113,7 +107,7 @@
   </UML:Model>
  </XMI.content>
  <XMI.extensions xmi.extender="umbrello">
-  <docsettings viewid="uYF4f46pmuZZ1" uniqueid="ugTspWj76AnRi" documentation=""/>
+  <docsettings viewid="uYF4f46pmuZZ1" uniqueid="uIMOwHhdqEfuT" documentation=""/>
   <listview>
    <listitem open="1" type="800" id="Views">
     <listitem open="1" type="821" id="Component_View"/>
@@ -142,11 +136,11 @@
       <listitem open="0" type="829" id="uIuXYo3pfLCCb"/>
      </listitem>
      <listitem open="1" type="813" id="us9i6OhqMGgmX">
-      <listitem open="0" type="815" id="uFrAuaNrw6wK9"/>
-      <listitem open="0" type="815" id="unKHrP7adrfrb"/>
+      <listitem open="0" type="814" id="uknDG7iZTnAC2"/>
       <listitem open="0" type="815" id="ug40cnBka6r4a"/>
-      <listitem open="0" type="815" id="ut9L0yqKzTbx7"/>
+      <listitem open="0" type="814" id="uIMOwHhdqEfuT"/>
       <listitem open="0" type="815" id="uJ5OHHCK8YXS0"/>
+      <listitem open="0" type="815" id="ut9L0yqKzTbx7"/>
       <listitem open="0" type="814" id="umJF0uN6AWdk2"/>
       <listitem open="0" type="814" id="uX3zfjAFDYXkZ"/>
       <listitem open="0" type="814" id="uLDbMPLKYbM6F"/>
@@ -155,6 +149,7 @@
       <listitem open="0" type="815" id="u91g5tsfDrygm"/>
       <listitem open="0" type="815" id="u7QsFmXNAGZ9m"/>
      </listitem>
+     <listitem open="1" type="813" id="usK56d47Wt5GG"/>
     </listitem>
     <listitem open="1" type="802" id="Use_Case_View"/>
    </listitem>
