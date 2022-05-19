@@ -26,21 +26,21 @@ The main project is split into three sections: Core, Completion, Challenge. Each
 # Planning
 
 ## Core
-| **Start Date** | **Task Description**                                                      | **Responsible Team Member** | **End Date** | **Outcome** |
-| -------------- | ------------------------------------------------------------------------- | --------------------------- | ------------ | ----------- |
-| 13/5           | Construct skeleton code for the main() method                             | Anthony                     | 15/5         |             |
-| 13/5           | Create UML Class diagrams                                                 | Anthony                     | 15/5         |             |
-| 14/5           | Set up classes for Camera, Robot, Motor etc. using diagrams               | Anthony                     | 15/5         |             |
-| 14/5           | Create constants                                                          | Alex                        | 15/5         |             |
-| 13/5           | Develop code for basic movements (forward, backward, turn left and right) | Ev                          | 18/5         |  done* 17/5 |
-| 16/5           | Develop method to detect line using the robot camera                      | Anthony                     | 18/5         |             |
-| 16/5           | Detect offset (error) or how far from centre the line is                  | Alex                        | 18/5         |             |
-| 19/5           | Code the main function for core                                           | Ev                          | 20/5         |skeleton 17/5|
-| 19/5           | Tune basic movements in relation to the offset                            | Alex                        | 20/5         |             |
-| 21/5           | Create the recovery system (when the line is lost)                        | Ev                          | 22/5         |skeleton 17/5|
-| 21/5           | Tune and test recovery system                                             | Alex                        | 23/5         |             |
-| 24/5           | Test the core method                                                      | Alex                        | 25/5         |             |
-| 23/5           | Add red colour detection and switch to completion method                  | Anthony                     | 25/5         |             |
+| **Start Date** | **Task Description**                                                      | **Responsible Team Member** | **End Date** | **Outcome**      |
+| -------------- | ------------------------------------------------------------------------- | --------------------------- | ------------ | ---------------- |
+| 13/5           | Construct skeleton code for the main() method                             | Anthony                     | 15/5         | Completed 15/5   |
+| 13/5           | Create UML Class diagrams                                                 | Anthony                     | 15/5         | Completed 19/5   |
+| 14/5           | Set up classes for Hardware etc. using diagrams                           | Anthony                     | 15/5         | Completed 19/5   |
+| 14/5           | Create constants                                                          | Alex                        | 15/5         | Add as we go     |
+| 13/5           | Develop code for basic movements (forward, backward, turn left and right) | Ev                          | 18/5         | Completed\* 17/5 |
+| 16/5           | Develop method to detect line using the robot camera                      | Anthony                     | 18/5         |                  |
+| 16/5           | Detect offset (error) or how far from centre the line is                  | Alex                        | 18/5         |                  |
+| 19/5           | Code the main function for core                                           | Ev                          | 20/5         | Skeleton 17/5    |
+| 19/5           | Tune basic movements in relation to the offset                            | Alex                        | 20/5         |                  |
+| 21/5           | Create the recovery system (when the line is lost)                        | Ev                          | 22/5         | Skeleton 17/5    |
+| 21/5           | Tune and test recovery system                                             | Alex                        | 23/5         |                  |
+| 24/5           | Test the core method                                                      | Alex                        | 25/5         |                  |
+| 23/5           | Add red colour detection and switch to completion method                  | Anthony                     | 25/5         |                  |
 
 
 ## Completion
