@@ -1,4 +1,7 @@
 #include "images.h"
+#include <numeric> // std::inner_product
+#include <vector> 
+#include <functional>
 
 // movement globals - needs to be localised
 int prevLeftVel = 0;
@@ -12,7 +15,7 @@ const int MAX_VEL = 40;
 int get_vel(int tarVel, int prevVel)
 {
 	int vel = (tarVel - prevVel) / 0.6 + prevVel;
-	std::cout << vel << "," << prevVel << std::endl;
+	//std::cout << vel << "," << prevVel << std::endl;
 	return vel;
 }
 
@@ -43,6 +46,51 @@ int set_vel(int tarVel, int velD)
 	set_motors(vel,vel);
 	update_sim(1500);
  **/
+int offset_calc()
+{
+std::vector<int> index_array;  // indexing array from -50 to 49 for inner product calculation
+std::vector<int> range_array; //array for range of pixels
+std::vector<int> bW_array; //array for black and white pixels
+int init = 0; // additonal number for inner product 
+
+  for (int i=0; i<camera_image.width; i++){
+	int r,g,b = 0;
+	r = (int)get_camera_pixel(50,i,0);
+	g = (int)get_camera_pixel(50,i,1);
+	b = (int)get_camera_pixel(50,i,2);
+	int rgbv = (r+g+b)/3;
+	if (rgbv<30){
+		bW_array.push_back(1); // black 
+	}else if(rgbv>=30){
+	bW_array.push_back(0); //white
+	}
+	//std::cout<<bW_array.at(i)<<std::endl;	
+	}
+	
+for (int i = 0; i<camera_image.width; i++){
+	range_array.push_back(i);
+	//std::cout<<range_array.at(i)<<std::endl;	
+}
+
+for (int i = 0; i<camera_image.width; i++){
+
+	int mPosition = camera_image.width/2;
+	index_array.push_back(i-mPosition);
+	//std::cout<<index_array.at(i)<<std::endl;
+	
+}
+
+int offset_calc = std::inner_product(index_array.begin(),index_array.end() , bW_array.begin(), init);	
+std::cout<<offset_calc<<std::endl;
+bW_array.clear();
+range_array.clear();
+index_array.clear();
+
+
+//return offset calc;
+return offset_calc;
+}
+
 
 int turning_move(int error, int prevError, int f_vel, int step)
 {
@@ -61,27 +109,28 @@ int turning_move(int error, int prevError, int f_vel, int step)
 	return 0;
 }
 
-bool hasColour(int colourId, ImagePPM camera)
-{
-	double maxNumberOfColouredPixels = 0;
-	double numberOfColouredPixels = 0;
-	for (int i = 0; i < camera.pixs.size(); i++)
-	{
-		if (pixelHasColour(colourId, camera.pixs[i]))
-		{
-			if (maxNumberOfColouredPixels >= numberOfColouredPixels)
-			{
-				return true;
-			}
-			else
-			{
-				numberOfColouredPixels++;
-			}
-		}
-	}
-	return false;
-}
+//bool hasColour(int colourId, ImagePPM camera)
+//{
+	//double maxNumberOfColouredPixels = 0;
+	//double numberOfColouredPixels = 0;
+	//for (int i = 0; i < camera.pixs.size(); i++)
+	//{
+		//if (pixelHasColour(colourId, camera.pixs[i]))
+		//{
+			//if (maxNumberOfColouredPixels >= numberOfColouredPixels)
+			//{
+				//return true;
+			//}
+			//else
+			//{
+				//numberOfColouredPixels++;
+			//}
+		//}
+	//}
+	//return false;
+//}
 
+   
 bool pixelHasColour(int colourId, Pixel pixel)
 {
 	double threshold = 1.5;	  // the amount by which the red, green or blue has to be above the other two
@@ -118,27 +167,29 @@ bool detectLine()
 	return isBlack;
 }
 
-int core()
-{
-	int i = 0;
-	while (!hasColour(0, camera_image))
-	{
-		if (detectLine())
-		{
-			int[] error = readPixels();
-			turning_move(error[0], error[1], 10, i);
-			i++;
-		}
-		else
-		{
-			i = 0;
-			turning_move(0, 0, -10, i);
-		}
-		update_sim(1500);
-	}
-	return 0;
-}
+//int core()
+//{
+	//int i = 0;
+	//while (!hasColour(0, camera_image))
+	//{
+		//if (detectLine())
+		//{
+			//int[] error = readPixels();
+			//turning_move(error[0], error[1], 10, i);
+			//i++;
+		//}
+		//else
+		//{
+			//i = 0;
+			//turning_move(0, 0, -10, i);
+		//}
+		//update_sim(1500);
+	//}
+	//return 0;
+//}
 
+	
+	
 int main()
 {
 	std::cout << "start simulation..." << std::endl;
@@ -150,6 +201,7 @@ int main()
 
 	while (true)
 	{
+		offset_calc();
 		turning_move(0, 0, 15, 0);
 		update_sim(1500);
 	}
