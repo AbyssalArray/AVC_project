@@ -26,7 +26,7 @@ The main project is split into three sections: Core, Completion, Challenge. Each
 # Planning
 
 ## Core
-| **Start Date** | **Task Description**                                                      | **Responsible Team Member** | **End Date** | **Outcome**      |
+| **Start Date** | **Task Description**                                                      | **Responsible Team Member** | **End Date** | **Outcome As of 22/05**      |
 | -------------- | ------------------------------------------------------------------------- | --------------------------- | ------------ | ---------------- |
 | 13/5           | Construct skeleton code for the main() method                             | Ev                          | 15/5         | Completed 15/5   |
 | 13/5           | Create UML Class diagrams                                                 | Anthony                     | 15/5         | Completed 19/5   |
