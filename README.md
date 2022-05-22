@@ -32,8 +32,8 @@ The main project is split into three sections: Core, Completion, Challenge. Each
 | 13/5           | Create UML Class diagrams                                                 | Anthony                     | 15/5         | Completed 19/5   |
 | 14/5           | Set up classes for Hardware etc. using diagrams                           | Anthony                     | 15/5         | Completed 19/5   |
 | 14/5           | Create constants                                                          | Alex                        | 15/5         | Add as we go     |
-| 13/5           | Develop code for basic movements (forward, backward, turn left and right) | Ev                          | 18/5         | Completed\* 17/5 |
-| 16/5           | Develop method to detect line using the robot camera                      | Anthony                     | 18/5         |                  |
+| 13/5           | Develop code for basic movements (forward, backward, turn left and right) | Ev                          | 18/5         | Completed\* 17/5 |  
+| 16/5           | Develop method to detect line using the robot camera                      | Alex                        | 18/5         |                  |
 | 16/5           | Detect offset (error) or how far from centre the line is                  | Alex                        | 18/5         |                  |
 | 19/5           | Code the main function for core                                           | Ev                          | 20/5         | Skeleton 17/5    |
 | 19/5           | Tune basic movements in relation to the offset                            | Alex                        | 20/5         |                  |
