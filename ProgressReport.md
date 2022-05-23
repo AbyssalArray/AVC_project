@@ -7,10 +7,16 @@ Something that was unexpected was that our Software Architect completed most of 
 
 Something else that was not according to plan was that we did not expect the code to not compile for so long. This made our Project Designer's role difficult, as he could not test the code easily if it would not run. The reason for this problem was that the nature of the project meant that the code was difficult to get started, as there were a lot of constants and methods that needed to be set up and working before the robot could even move, or travel along line. To remedy this, we could have had more detailed planning, including some more pseudocode or flow charts in the design process to make the code compile quicker.
 ## What are the bottlenecks? What is slowing development?
+The main bottleneck was the fact that the code could not be compiled. This is because there were missing methods that needed developing that were included in some of the code. We could get around this by commenting some of them out, or setting a variable to an initial arbitrary value, but this was not always possible. This was particularly problematic for the Project Designer, who needed this to progress with testing.
 
+Our Software Architect was also assigned not enough work in the beginning, which meant he had finished most of the tasks that he was responsible for before other essential aspects of the program were completed. This was a significant bottleneck as he felt like he could do more work, but there was none assigned for him to do. He was also unsure if any of his code would work, as it was difficult to test when the program did not compile.
 
 ## Team recommendations on how to advance the project
-Increased planning
+The recommendation from the team is to ensure more detailed planning for future methods. This would make it easier to develop the code and have a clearer idea of what is required of each team member. So far, sometimes team members have been unsure about what to progress with as the plan was not specific enough, or they got confused as to what method they were developing. This lead to aspects of the project lagging behind. To avoid this, we need to advance the project keeping in mind this plan and potentially extending it when required.
+
+There has also been discussion about the decision of whether to use classes and separate files. This would help to chunk the code up and make it easier to work with. Whether there are enough methods to separate into multiple classes, however, could mean there is no need to do so.
+
+Finally, an important thing for each team member to advance the project is sticking to deadlines. If one cannot be met due to something unexpected occuring, communication is key to the success of the project. With this is mind, we believe we are slightly behind schedule, but able to make this up quickly over the coming days and get on to completion and challenge as soon as possible.
 
 # Planning
 
