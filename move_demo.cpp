@@ -203,12 +203,11 @@ int main()
 
 	init(110, 160, 0 * 3.14159 / 180.0); // start of completion
 
-	while (true)
-	{
+	core();
+
 		/*offset_calc();
 		turning_move(0, 0, 15, 0);
 		update_sim(1500);*/
-		core();
-	}
+
 	return 0;
 }
