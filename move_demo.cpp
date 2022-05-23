@@ -100,8 +100,8 @@ int turning_move(int error, int prevError, int f_vel, int step)
 {
 
 	// coefficients need tuning
-	const double propGain = 0.5;
-	const double derivGain = 0.5;
+	const double propGain = 0.125;
+	const double derivGain = 0.125;
 	// first step is just forward
 	if (step == 0)
 		set_vel(f_vel, 0);
@@ -116,42 +116,41 @@ int turning_move(int error, int prevError, int f_vel, int step)
 bool pixelHasColour(int colourId, Pixel pixel)
 {
 	double threshold = 1.5;	  // the amount by which the red, green or blue has to be above the other two
-	double minimumColour = 5; // the strength of the colour (out of 255)
+	double minCol = 5; // the strength of the colour (out of 255)
 	double luminosity = (pixel.r + pixel.g + pixel.b) / 3.0;
 	switch (colourId)
 	{
 	case 0: // red
-		if (pixel.r > luminosity * threshold && pixel.r > minimumColour)
-		{
+		if (pixel.r > luminosity * threshold && pixel.r > minCol)
 			return true; // if pixel red is more than luminosity by some threshold and mainly red, pixel is red
-		}
 		break;
 	case 1: // green
-		if (pixel.g > luminosity * threshold && pixel.g > minimumColour)
-		{
+		if (pixel.g > luminosity * threshold && pixel.g > minCol)
 			return true; // if pixel green is more than luminosity by some threshold and mainly green, pixel is green
-		}
 		break;
 	case 2: // blue
-		if (pixel.b > luminosity * threshold && pixel.b > minimumColour)
-		{
+		if (pixel.b > luminosity * threshold && pixel.b > minCol)
 			return true; // if pixel blue is more than luminosity by some threshold and mainly blue, pixel is blue
-		}
+		break;
+	case 3: // blue
+		if (luminosity < minCol)
+			return true; // if pixel blue is more than luminosity by some threshold and mainly blue, pixel is blue
 		break;
 	}
 	return false;
 }
 
-bool hasColour(int colourId, ImagePPM camera)
+bool hasColour(int colourId)
 {
 	double maxNumberOfColouredPixels = 0;
 	double numberOfColouredPixels = 0;
-	for (int i = 0; i < camera.pixs.size(); i++)
+	for (size_t i = 0; i < camera_image.width; i++)
 	{
 		if (pixelHasColour(colourId, camera.pixs[i]))
 		{
 			if (maxNumberOfColouredPixels >= numberOfColouredPixels)
 			{
+				std::cout<<"true"<<std::endl;
 				return true;
 			}
 			else
@@ -165,8 +164,8 @@ bool hasColour(int colourId, ImagePPM camera)
 
 bool detectLine()
 {
-	bool isBlack = true;
-
+	bool isBlack = hasColour(3,camera_image);
+	
 	return isBlack;
 }
 
@@ -177,7 +176,7 @@ int core()
 
 	while (!hasColour(0, camera_image))
 	{
-		if (detectLine())
+		if (offset_calc() != 0)
 		{
 			curError = offset_calc();
 			turning_move(prevError, curError, 10, i);
@@ -188,6 +187,7 @@ int core()
 		{
 			i = 0;
 			turning_move(0, 0, -10, i);
+			i++;
 		}
 		update_sim(1500);
 	}
