@@ -9,6 +9,7 @@ int prevRightVel = 0;
 int forwardVel = 0;
 const int MAX_VEL = 40;
 int prevError = 0;
+double minCol = 30; // the strength of the colour (out of 255)
 
 // reverse engineered set_motor method, will calculate perfect speed
 // to reach the target speed in 1 step, doesnt work for speeds above 24
@@ -16,7 +17,7 @@ int prevError = 0;
 int get_vel(int tarVel, int prevVel)
 {
 	int vel = (tarVel - prevVel) / 0.6 + prevVel;
-	std::cout << vel << "," << prevVel << std::endl;
+	std::cout << "Velocity: " << vel << " | Previous Velocity: " << prevVel << std::endl;
 	return vel;
 }
 
@@ -61,44 +62,35 @@ int offset_calc()
 		g = (int)get_camera_pixel(50, i, 1);
 		b = (int)get_camera_pixel(50, i, 2);
 		int rgbv = (r + g + b) / 3;
-		if (rgbv < 30)
+
+		if (rgbv < minCol)
 		{
 			bW_array.push_back(1); // black
 		}
-		else if (rgbv >= 30)
+		else if (rgbv >= minCol)
 		{
 			bW_array.push_back(0); // white
 		}
-		// std::cout<<bW_array.at(i)<<std::endl;
-	}
 
-	for (int i = 0; i < camera_image.width; i++)
-	{
+		// std::cout<<bW_array.at(i)<<std::endl;
 		range_array.push_back(i);
 		// std::cout<<range_array.at(i)<<std::endl;
-	}
-
-	for (int i = 0; i < camera_image.width; i++)
-	{
-
 		int mPosition = camera_image.width / 2;
 		index_array.push_back(i - mPosition);
-		// std::cout<<index_array.at(i)<<std::endl;
+		// std::cout << index_array.at(i) << std::endl;
 	}
 
-	int offset_calc = std::inner_product(index_array.begin(), index_array.end(), bW_array.begin(), init);
-	std::cout << offset_calc << std::endl;
+	int offset_calc = std::inner_product(index_array.begin(), index_array.end(), bW_array.begin(), init); // std::accumulate(bW_array.begin(), bW_array.end(), 0);
+	std::cout << "Offset: " << offset_calc << std::endl;
 	bW_array.clear();
 	range_array.clear();
 	index_array.clear();
 
-	// return offset calc;
 	return offset_calc;
 }
 
 int turning_move(int error, int prevError, int f_vel, int step)
 {
-
 	// coefficients need tuning
 	const double propGain = 0.125;
 	const double derivGain = 0.125;
@@ -115,9 +107,14 @@ int turning_move(int error, int prevError, int f_vel, int step)
 
 bool pixelHasColour(int colourId, Pixel pixel)
 {
-	double threshold = 1.5;	  // the amount by which the red, green or blue has to be above the other two
-	double minCol = 5; // the strength of the colour (out of 255)
+	double threshold = 1.5; // the amount by which the red, green or blue has to be above the other two
 	double luminosity = (pixel.r + pixel.g + pixel.b) / 3.0;
+
+	/*std::cout << "Red: " << (int)pixel.r << std::endl;
+	std::cout << "Green: " << (int)pixel.g << std::endl;
+	std::cout << "Blue: " << (int)pixel.b << std::endl;
+	std::cout << "Luminosity: " << (int)luminosity << std::endl;*/
+
 	switch (colourId)
 	{
 	case 0: // red
@@ -142,31 +139,25 @@ bool pixelHasColour(int colourId, Pixel pixel)
 
 bool hasColour(int colourId)
 {
-	double maxNumberOfColouredPixels = 0;
-	double numberOfColouredPixels = 0;
-	for (size_t i = 0; i < camera_image.width; i++)
+	double minColPixels = 20;
+	double numColPixels = 0;
+	if (colourId == 0)
+		std::cout << "New image" << std::endl;
+
+	for (int row = 0; row < camera_image.height; row++)
 	{
-		if (pixelHasColour(colourId, get_camera_pixel(camera_image.height, i))
+		for (int column = 0; column < camera_image.width; column++)
 		{
-			if (maxNumberOfColouredPixels >= numberOfColouredPixels)
+			if (pixelHasColour(colourId, get_camera_pixel(row, column)))
 			{
-				std::cout<<"true"<<std::endl;
-				return true;
-			}
-			else
-			{
-				numberOfColouredPixels++;
+				if (minColPixels <= numColPixels)
+					return true;
+				else
+					numColPixels++;
 			}
 		}
 	}
 	return false;
-}
-
-bool detectLine()
-{
-	bool isBlack = hasColour(3);
-	
-	return isBlack;
 }
 
 int core()
@@ -176,7 +167,7 @@ int core()
 
 	while (!hasColour(0))
 	{
-		if (offset_calc() != 0)
+		if (hasColour(3))
 		{
 			curError = offset_calc();
 			turning_move(prevError, curError, 10, i);
@@ -197,17 +188,15 @@ int core()
 int main()
 {
 	std::cout << "start simulation..." << std::endl;
-	// init(1698,1018,90*3.14159/180.0); // start of completion
-	// init(1880,640,90*3.14159/180.0);
-	// init(110,160,15*3.14159/180.0); // start of core
 
-	init(110, 160, 0 * 3.14159 / 180.0); // start of completion
+	init(110, 160, 0 * M_PI / 180.0); // start of core
+	// init(1880, 640, 90 * M_PI / 180.0); // start of completion
 
 	core();
 
-		/*offset_calc();
-		turning_move(0, 0, 15, 0);
-		update_sim(1500);*/
+	/*offset_calc();
+	turning_move(0, 0, 15, 0);
+	update_sim(1500);*/
 
 	return 0;
 }
