@@ -50,11 +50,11 @@ int set_vel(int tarVel, int velD)
  **/
 int offset_calc()
 {
-	std::vector<int> index_array; // indexing array from -50 to 49 for inner product calculation
-	std::vector<int> range_array; // array for range of pixels
+	//std::vector<int> index_array; // indexing array from -50 to 49 for inner product calculation
+	//std::vector<int> range_array; // array for range of pixels
 	std::vector<int> bW_array;	  // array for black and white pixels
-	int init = 0;				  // additonal number for inner product
-
+	//int init = 0;				  // additonal number for inner product
+    int offset = 0;
 	for (int i = 0; i < camera_image.width; i++)
 	{
 		int r, g, b = 0;
@@ -71,22 +71,30 @@ int offset_calc()
 		{
 			bW_array.push_back(0); // white
 		}
-
-		// std::cout<<bW_array.at(i)<<std::endl;
+        
+		/*// std::cout<<bW_array.at(i)<<std::endl;
 		range_array.push_back(i);
 		// std::cout<<range_array.at(i)<<std::endl;
 		int mPosition = camera_image.width / 2;
 		index_array.push_back(i - mPosition);
 		// std::cout << index_array.at(i) << std::endl;
 	}
+   
 
-	int offset_calc = std::inner_product(index_array.begin(), index_array.end(), bW_array.begin(), init); // std::accumulate(bW_array.begin(), bW_array.end(), 0);
-	std::cout << "Offset: " << offset_calc << std::endl;
+	//int offset_calc = std::inner_product(index_array.begin(), index_array.end(), bW_array.begin(), init); // std::accumulate(bW_array.begin(), bW_array.end(), 0);
+	//std::cout << "Offset: " << offset_calc << std::endl;
+	*/
+}
+	for (int i =0; i<camera_image.width; i++){
+	if (bW_array[i]==1){
+	offset = i-50;	
+	}
+}
 	bW_array.clear();
-	range_array.clear();
-	index_array.clear();
-
-	return offset_calc;
+	//range_array.clear();
+	//index_array.clear();
+    std::cout<< offset <<std::endl;
+	return offset;
 }
 
 int turning_move(int error, int prevError, int f_vel, int step)
