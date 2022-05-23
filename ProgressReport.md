@@ -16,7 +16,7 @@ The recommendation from the team is to ensure more detailed planning for future 
 
 There has also been discussion about the decision of whether to use classes and separate files. This would help to chunk the code up and make it easier to work with. Whether there are enough methods to separate into multiple classes, however, could mean there is no need to do so.
 
-Finally, an important thing for each team member to advance the project is sticking to deadlines. If one cannot be met due to something unexpected occuring, communication is key to the success of the project. With this is mind, we believe we are slightly behind schedule, but able to make this up quickly over the coming days and get on to completion and challenge as soon as possible.
+Finally, an important thing for each team member to advance the project is sticking to deadlines. If one cannot be met due to something unexpected occuring, communication is key to the success of the project. With this is mind, although we are on track according to our plan, we believe we are slightly behind schedule, since the tasks were allocated conservatively time-wise. But, we should be able to make this time up quickly over the coming days and get on to completion and challenge as soon as possible.
 
 # Planning
 
