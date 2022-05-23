@@ -1,3 +1,11 @@
+#Project Analysis
+
+## What went according to plan? What did not?
+
+## What are the bottlenecks? What is slowing development?
+
+## Team recommendations on how to advance the project
+
 # Planning
 
 ## Core
