@@ -164,7 +164,7 @@ bool hasColour(int colourId)
 
 bool detectLine()
 {
-	bool isBlack = hasColour(3,camera_image);
+	bool isBlack = hasColour(3);
 	
 	return isBlack;
 }
@@ -174,7 +174,7 @@ int core()
 	int i = 0;
 	int curError = 0;
 
-	while (!hasColour(0, camera_image))
+	while (!hasColour(0))
 	{
 		if (offset_calc() != 0)
 		{
