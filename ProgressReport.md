@@ -2,6 +2,7 @@
 
 ## What went according to plan? What did not?
 
+
 ## What are the bottlenecks? What is slowing development?
 
 ## Team recommendations on how to advance the project
@@ -12,8 +13,8 @@
 | **Start Date** | **Task Description**                                                      | **Responsible Team Member** | **End Date** | **Outcome as of 22/5** |
 | -------------- | ------------------------------------------------------------------------- | --------------------------- | ------------ | ---------------------- |
 | 13/5           | Construct skeleton code for the main() method                             | Ev                          | 15/5         | Completed 15/5         |
-| 13/5           | Create UML Class diagrams                                                 | Anthony                     | 15/5         | Completed 19/5         |
-| 14/5           | Set up classes for Hardware etc. using diagrams                           | Anthony                     | 15/5         | Completed 19/5         |
+| 13/5           | Create UML Class diagrams                                                 | Anthony                     | 15/5         | Completed\* 19/5       |
+| 14/5           | Set up classes for Hardware etc. using diagrams                           | Anthony                     | 15/5         | Completed\* 19/5       |
 | 14/5           | Create constants                                                          | Alex                        | 15/5         | Add as we go           |
 | 13/5           | Develop code for basic movements (forward, backward, turn left and right) | Ev                          | 18/5         | Completed 17/5         |
 | 16/5           | Develop method to detect line using the robot camera                      | Alex                        | 18/5         | Completed\* 22/5       |
