@@ -146,7 +146,7 @@ bool hasColour(int colourId)
 	double numberOfColouredPixels = 0;
 	for (size_t i = 0; i < camera_image.width; i++)
 	{
-		if (pixelHasColour(colourId, camera.pixs[i]))
+		if (pixelHasColour(colourId, get_camera_pixel(camera_image.height, i))
 		{
 			if (maxNumberOfColouredPixels >= numberOfColouredPixels)
 			{
