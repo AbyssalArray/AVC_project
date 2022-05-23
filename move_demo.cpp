@@ -132,9 +132,9 @@ bool pixelHasColour(int colourId, Pixel pixel)
 		if (pixel.b > luminosity * threshold && pixel.b > minCol)
 			return true; // if pixel blue is more than luminosity by some threshold and mainly blue, pixel is blue
 		break;
-	case 3: // blue
+	case 3: // black
 		if (luminosity < minCol)
-			return true; // if pixel blue is more than luminosity by some threshold and mainly blue, pixel is blue
+			return true; // if pixel is darker than minCol, pixel is black
 		break;
 	}
 	return false;
