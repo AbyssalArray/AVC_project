@@ -49,51 +49,26 @@ int set_vel(int tarVel, int velD)
  **/
 int offset_calc()
 {
-	std::vector<int> index_array; // indexing array from -50 to 49 for inner product calculation
-	std::vector<int> range_array; // array for range of pixels
-	std::vector<int> bW_array;	  // array for black and white pixels
-	int init = 0;				  // additonal number for inner product
-
+	std::vector<int> bW_array; // array for black and white pixels
+	int offset = 0;
 	for (int i = 0; i < camera_image.width; i++)
 	{
 		int r, g, b = 0;
-		r = (int)get_camera_pixel(50, i, 0);
-		g = (int)get_camera_pixel(50, i, 1);
-		b = (int)get_camera_pixel(50, i, 2);
-		int rgbv = (r + g + b) / 3;
-		if (rgbv < 30)
-		{
-			bW_array.push_back(1); // black
-		}
-		else if (rgbv >= 30)
-		{
-			bW_array.push_back(0); // white
-		}
+		bW_array.push_back(0); // white
 		// std::cout<<bW_array.at(i)<<std::endl;
+		// int mPosition = camera_image.width / 2;
+		// index_array.push_back(i - mPosition);
 	}
-
 	for (int i = 0; i < camera_image.width; i++)
 	{
-		range_array.push_back(i);
-		// std::cout<<range_array.at(i)<<std::endl;
+		if (bW_array[i] == 1)
+		{
+			offset = i - 50;
+		}
 	}
-
-	for (int i = 0; i < camera_image.width; i++)
-	{
-
-		int mPosition = camera_image.width / 2;
-		index_array.push_back(i - mPosition);
-		// std::cout<<index_array.at(i)<<std::endl;
-	}
-
-	int offset_calc = std::inner_product(index_array.begin(), index_array.end(), bW_array.begin(), init);
-	std::cout << "error: "<<offset_calc << std::endl;
 	bW_array.clear();
-	range_array.clear();
-	index_array.clear();
-
-	// return offset calc;
-	return offset_calc;
+	std::cout << offset << std::endl;
+	return offset;
 }
 
 int turning_move(int error, int prevError, int f_vel, int step)
@@ -116,11 +91,14 @@ int turning_move(int error, int prevError, int f_vel, int step)
 
 bool pixelHasColour(int colourId, Pixel pixel)
 {
-	
-	double threshold = 1.5;	  // the amount by which the red, green or blue has to be above the other two
-	double minCol = 5; // the strength of the colour (out of 255)
+	double threshold = 1.5; // the amount by which the red, green or blue has to be above the other two
 	double luminosity = (pixel.r + pixel.g + pixel.b) / 3.0;
-	
+
+	/*std::cout << "Red: " << (int)pixel.r << std::endl;
+	std::cout << "Green: " << (int)pixel.g << std::endl;
+	std::cout << "Blue: " << (int)pixel.b << std::endl;
+	std::cout << "Luminosity: " << (int)luminosity << std::endl;*/
+
 	switch (colourId)
 	{
 	case 0: // red
@@ -137,28 +115,29 @@ bool pixelHasColour(int colourId, Pixel pixel)
 		break;
 	case 3: // black
 		if (luminosity < minCol)
-			return true; // if pixel blue is more than luminosity by some threshold and mainly blue, pixel is blue
+			return true; // if pixel is darker than minCol, pixel is black
 		break;
 	}
 	return false;
 }
 
-bool hasColour(int colourId, ImagePPM camera)
+bool hasColour(int colourId)
 {
-	double maxNumberOfColouredPixels = 0;
-	double numberOfColouredPixels = 0;
-	//potential issue in for loop
-	for (int i = 0; i < (int)camera.pixs.size(); i++)
+	double minColPixels = 20;
+	double numColPixels = 0;
+	if (colourId == 0)
+		std::cout << "New image" << std::endl;
+
+	for (int row = 0; row < camera_image.height; row++)
 	{
-		if (pixelHasColour(colourId, camera.pixs[i]))
+		for (int column = 0; column < camera_image.width; column++)
 		{
-			if (maxNumberOfColouredPixels >= numberOfColouredPixels)
+			if (pixelHasColour(colourId, get_camera_pixel(row, column)))
 			{
-				return true;
-			}
-			else
-			{
-				numberOfColouredPixels++;
+				if (minColPixels <= numColPixels)
+					return true;
+				else
+					numColPixels++;
 			}
 		}
 	}
@@ -178,11 +157,11 @@ int core()
 	int i = 1;
 	int curError = 0;
 	
-	while (!hasColour(0, camera_image))
+	while (!hasColour(0))
 	{	
 		if (i >= 0)
 		{
-			std::cout<<"forwrads"<<std::endl;
+			std::cout<<"forwards"<<std::endl;
 			curError = offset_calc();
 			turning_move(prevError, curError, 10, i);
 			prevError = curError;
@@ -204,16 +183,10 @@ int core()
 int main()
 {
 	std::cout << "start simulation..." << std::endl;
-	// init(1698,1018,90*3.14159/180.0); // start of completion
-	// init(1880,640,90*3.14159/180.0);
-	// init(110,160,15*3.14159/180.0); // start of core
+	init(110, 160, 0 * M_PI / 180.0); // start of core
+	// init(1880, 640, 90 * M_PI / 180.0); // start of completion
 
-	init(110, 160, 0 * 3.14159 / 180.0); // start of completion
-
-		/*offset_calc();
-		turning_move(0, 0, 15, 0);
-		update_sim(1500);*/
-		core();
+	core();
 	
 	return 0;
 }
