@@ -9,6 +9,7 @@ int prevRightVel = 0;
 int forwardVel = 0;
 const int MAX_VEL = 40;
 int prevError = 0;
+int minCol = 30;
 
 // reverse engineered set_motor method, will calculate perfect speed
 // to reach the target speed in 1 step, doesnt work for speeds above 24
@@ -146,7 +147,7 @@ bool hasColour(int colourId)
 
 bool detectLine()
 {
-	bool isBlack = hasColour(3,camera_image);
+	bool isBlack = hasColour(3);
 	
 	return isBlack;
 }
