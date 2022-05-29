@@ -85,14 +85,9 @@ int offset_calc()
 {
 	int offset = 0;
 	for (int i = 0; i < camera_image.width; i++)
-	{
+	{   
 		if (pixelHasColour(3, get_camera_pixel(camera_image.height - 1, i)))
-		{
-			if (i > camera_image.width / 2 - 1)
-				offset += 1;
-			else
-				offset -= 1;
-		}
+			offset += (i - camera_image.width / 2);
 	}
 
 	std::cout << std::endl << "Offset: " << offset << std::endl;
@@ -105,6 +100,7 @@ int turning_move(int error, int prevError, int f_vel, int step)
 	// coefficients need tuning
 	const double propGain = 0.25;
 	const double derivGain = 0.125;
+    error = offset_calc();
 	// first step is just forward
 	if (step == 0)
 		set_vel(f_vel, 0);
@@ -162,8 +158,10 @@ int core()
 		else
 		{
 			i = 0;
+			//for (int a = 0; a<3; a++){
 			curError = offset_calc();
-			turning_move(0, 0, -10, i);
+			turning_move(0, 0, -20, i);
+	//	}
 			prevError = curError;
 			i++;
 		}
