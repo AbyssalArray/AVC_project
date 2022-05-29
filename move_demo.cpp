@@ -87,12 +87,7 @@ int offset_calc()
 	for (int i = 0; i < camera_image.width; i++)
 	{   
 		if (pixelHasColour(3, get_camera_pixel(camera_image.height - 1, i)))
-		{
-			if (i > camera_image.width / 2 - 1)
-				offset += 1;
-			else
-				offset -= 1;
-		}
+			offset += (i - camera_image.width / 2);
 	}
 
 	std::cout << std::endl << "Offset: " << offset << std::endl;
