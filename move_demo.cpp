@@ -81,26 +81,45 @@ bool pixelHasColour(int colourId, Pixel pixel)
 	return false;
 }
 
-int offset_calc()
+int offset_calc(bool isBot)
 {
-	int offset = 0;
+	int row = (isBot) ? camera_image.height - 1 : 0;
+	int pixels = 0;
+	int off = 0;
 	for (int i = 0; i < camera_image.width; i++)
 	{   
-		if (pixelHasColour(3, get_camera_pixel(camera_image.height - 1, i)))
-			offset += (i - camera_image.width / 2);
+		if (pixelHasColour(3, get_camera_pixel(row, i)))
+		{
+			pixels++;
+			off += i - (int)(camera_image.width / 2);
+		}
 	}
-
-	std::cout << std::endl << "Offset: " << offset << std::endl;
-	return offset;
+	off = (pixels > 0) ?  off/pixels : -camera_image.width / 2 -1;
+	
+	return off;
 }
-
+int side_offset(bool isLeft) {
+	int col = (isLeft) ? 0 : camera_image.width - 1;
+	int pixels = 0;
+	float off = 0;
+	for (int i = 0; i < camera_image.height; i++)
+	{   
+		if (pixelHasColour(3, get_camera_pixel(i, col)))
+		{
+			pixels++;
+			off += i - (int)(camera_image.height / 2);
+		}
+	}
+	off = (pixels > 0) ?  off/pixels : -camera_image.height / 2 -1;
+	
+	return off;
+}
 int turning_move(int error, int prevError, int f_vel, int step)
 {
 
 	// coefficients need tuning
-	const double propGain = 0.25;
-	const double derivGain = 0.125;
-    error = offset_calc();
+	const double propGain = 0.24;
+	const double derivGain = 0.12;
 	// first step is just forward
 	if (step == 0)
 		set_vel(f_vel, 0);
@@ -139,41 +158,174 @@ bool detectLine()
 	return isBlack;
 }
 
+int rotate_left() {
+	for (int i = 0; i < 13; i++) {
+		turning_move(0, 25, 5, 1);
+		update_sim(100);
+	}
+/*	while (offset_calc(false) > 10 || offset_calc(false) < -10) {
+		turning_move(0, 25, 5, 1);
+		update_sim(100);
+	}*/
+	turning_move(0, 0, 0, 1);
+	return 0;
+}
+int rotate_right() {
+	std::cout << "Vert Offset: " << offset_calc(false) << std::endl;
+	for (int i = 0; i < 13; i++) {
+		turning_move(0, -25, 5, 1);
+		update_sim(100);
+	}
+/*	while (offset_calc(false) > 10 || offset_calc(false) < -10) {
+		turning_move(0, -25, 5, 1);
+		update_sim(100);
+	}*/
+	turning_move(0, 0, 0, 1);
+	return 0;
+}
+int skip_turn() {
+	for (int i = 0; i < 13; i++) {
+		turning_move(0, 0, 5, 0);
+		update_sim(100);
+	}
+	turning_move(0, 0, 0, 1);
+	return 0;
+}
+int rotate_back() {
+	for (int i = 0; i < 26; i++) {
+		turning_move(0, 25, 0, 1);
+		update_sim(100);
+	}
+	turning_move(0, 0, 0, 1);
+	return 0;
+}
+int chal() {
+	//bool isInter = false;
+	int i = 0;
+	int curError = 0;
+	int turns = 0;
+	while (offset_calc(true) > -51 || !hasColour(1)) {
+		std::cout<<turns<<std::endl;
+		if (turns == 7 && side_offset(false) > camera_image.height / 2 - 10) {
+			std::cout<<"finish"<<std::endl;
+			rotate_right();
+			skip_turn();
+		}
+		else if (side_offset(true) > camera_image.height / 2 - 10 ) {
+			turns++;
+			std::cout<<"left"<<std::endl;
+			rotate_left();
+		}
+		else if (offset_calc(false) > -51 && side_offset(false) > camera_image.height / 2 - 10 && side_offset(true) == -41 ) {
+			std::cout<<"forward"<<std::endl;
+			turns++;
+			skip_turn();
+		}
+		else if (side_offset(false) > camera_image.height / 2 - 10 && side_offset(true) == -41) {
+			std::cout<<"right"<<std::endl;
+			turns++;
+			rotate_right();
+		}
+		else if (offset_calc(true) == -51 && offset_calc(false) == -51) {
+			std::cout<<"end"<<std::endl;
+			if (offset_calc(true) == -51) {
+				turns++;
+				rotate_back();
+			}
+			
+		}
+		else {
+			prevError = curError;
+			curError = offset_calc(true);
+			curError = (curError == -51) ? 0 : curError;
+			if (true)
+				turning_move(prevError, curError, 10, i);
+			else
+				turning_move(0, 0, -10, i);
+			i++;
+			update_sim(100);
+		}
+	}
+	return 0;
+}
+
+int comp() {
+	//bool isInter = false;
+	int i = 0;
+	int curError = 0;
+	
+	while (offset_calc(true) > -51 || !hasColour(2)) {
+		if (side_offset(true) > camera_image.height / 2 - 10) {
+			std::cout<<"left"<<std::endl;
+			rotate_left();
+		}
+		else if (offset_calc(false) > -51 && side_offset(false) > camera_image.height / 2 - 10 && side_offset(true) == -51 ) {
+			std::cout<<"forward"<<std::endl;
+			skip_turn();
+		}
+		else if (side_offset(false) > camera_image.height / 2 - 10 && side_offset(true) == -51) {
+			std::cout<<"right"<<std::endl;
+			rotate_right();
+		}
+		else if (offset_calc(true) == -51 && offset_calc(false) == -51) {
+			std::cout<<"end"<<std::endl;
+			if (offset_calc(true) == -51) {
+			
+			rotate_back();
+		}
+			
+		}
+		else {
+			prevError = curError;
+			curError = offset_calc(true);
+			curError = (curError == -51) ? 0 : curError;
+			if (true)
+				turning_move(prevError, curError, 5, i);
+			else
+				turning_move(0, 0, -10, i);
+			i++;
+			update_sim(100);
+		}
+	}
+	while (offset_calc(true) < -camera_image.width / 2) {
+		turning_move(0, 0, 10, 0);
+		update_sim(100);
+	}
+	chal();
+	return 0;
+}
+
 int core()
 {
 
 	int i = 0;
 	int curError = 0;
 
-	while (!hasColour(0))
+	while (offset_calc(true) > -camera_image.width / 2 -1)
 	{
+		prevError = curError;
+		curError = offset_calc(true);
+		
 		if (hasColour(3))
-		{
-			// std::cout<<"forwards"<<std::endl;
-			curError = offset_calc();
 			turning_move(prevError, curError, 10, i);
-			prevError = curError;
-			i++;
-		}
 		else
-		{
-			i = 0;
-			//for (int a = 0; a<3; a++){
-			curError = offset_calc();
-			turning_move(0, 0, -20, i);
-	//	}
-			prevError = curError;
-			i++;
-		}
+			turning_move(0, 0, -10, i);
+		i++;
+		std::cout<<(curError - prevError)<<std::endl;
 		update_sim(100);
 	}
+	while (offset_calc(true) < -camera_image.width / 2) {
+		turning_move(0, 0, 10, 0);
+		update_sim(100);
+	}
+	comp();
 	return 0;
 }
 
 int main()
 {
 	std::cout << "start simulation..." << std::endl;
-	init(110, 160, 0 * M_PI / 180.0); // start of core
+	init(110,160,15*3.14159/180.0); // start of core
 	// init(1880, 640, 90 * M_PI / 180.0); // start of completion
 
 	core();
