@@ -17,6 +17,8 @@ int minCol = 30;
 int get_vel(int tarVel, int prevVel)
 {
 	int vel = (tarVel - prevVel) / 0.6 + prevVel;
+	std::cout << "Velocity: " << vel << std::endl;
+	std::cout << "Previous Velocity: " << prevVel << std::endl;
 	return vel;
 }
 
@@ -124,6 +126,7 @@ int turning_move(int error, int prevError, int f_vel, int step)
 	else
 	{
 		int velDiff = error * propGain + (error - prevError) * derivGain;
+		std::cout << "Velocity Difference: " << velDiff << std::endl;
 		set_vel(f_vel, velDiff);
 	}
 	return 0;
