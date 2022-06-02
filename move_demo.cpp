@@ -7,26 +7,35 @@
 int prevLeftVel = 0;
 int prevRightVel = 0;
 int forwardVel = 0;
-const int MAX_VEL = 40;
+const int MAX_VEL = 24;
 int prevError = 0;
 int minCol = 30;
+int update_speed = 100;
 
+const int OUT_SIDE = -camera_image.height / 2 - 1;
+const int OUT_VERT = -camera_image.width / 2 - 1;
+const bool LEFT = true;
+const bool RIGHT = false;
+const bool TOP = false;
+const bool BOT = true;
+
+const int SLOW_VEL = 5;
+const int FAST_VEL = 10;
+const int DETECT_RANGE = 10;
 // reverse engineered set_motor method, will calculate perfect speed
 // to reach the target speed in 1 step, doesnt work for speeds above 24
 // because that will go over the robots max speed and take more than 1 step
 int get_vel(int tarVel, int prevVel)
 {
 	int vel = (tarVel - prevVel) / 0.6 + prevVel;
-	std::cout << "Velocity: " << vel << std::endl;
-	std::cout << "Previous Velocity: " << prevVel << std::endl;
 	return vel;
 }
 
 // WARNING use only with target velocity below 24
 int set_vel(int tarVel, int velD)
 {
-	velD = (tarVel - velD < -24) ? 12 : velD;
-	velD = (tarVel + velD > 24) ? 12 : velD;
+	velD = (tarVel - velD < -MAX_VEL) ? MAX_VEL - tarVel : velD;
+	velD = (tarVel + velD > MAX_VEL) ? MAX_VEL - tarVel : velD;
 
 	int velLeft = get_vel(tarVel + velD, prevLeftVel);
 	prevLeftVel = (tarVel + velD);
@@ -38,27 +47,11 @@ int set_vel(int tarVel, int velD)
 	set_motors(velLeft, velRight);
 	return 0;
 }
-/*
- while (vel > MAX_VEL || vel < -MAX_VEL) {
-		if (vel > 0) set_motors(MAX_VEL,MAX_VEL);
-		else set_motors(-MAX_VEL,-MAX_VEL);
-		prevVel += vel;
-		update_sim(1500);
-		vel = (tarVel - prevVel) / 0.6 + prevVel;
-	}
-	set_motors(vel,vel);
-	update_sim(1500);
- **/
+
 bool pixelHasColour(int colourId, Pixel pixel)
 {
 	double threshold = 1.5; // the amount by which the red, green or blue has to be above the other two
 	double luminosity = (pixel.r + pixel.g + pixel.b) / 3.0;
-
-	/*std::cout << "Red: " << (int)pixel.r << std::endl;
-	std::cout << "Green: " << (int)pixel.g << std::endl;
-	std::cout << "Blue: " << (int)pixel.b << std::endl;
-	std::cout << "Luminosity: " << (int)luminosity << std::endl;*/
-
 	switch (colourId)
 	{
 	case 0: // red
@@ -94,7 +87,7 @@ int offset_calc(bool isBot)
 			off += i - (int)(camera_image.width / 2);
 		}
 	}
-	off = (pixels > 0) ?  off/pixels : -camera_image.width / 2 -1;
+	off = (pixels > 0) ?  off/pixels : OUT_VERT;
 	
 	return off;
 }
@@ -110,7 +103,7 @@ int side_offset(bool isLeft) {
 			off += i - (int)(camera_image.height / 2);
 		}
 	}
-	off = (pixels > 0) ?  off/pixels : -camera_image.height / 2 -1;
+	off = (pixels > 0) ?  off/pixels : OUT_SIDE;
 	
 	return off;
 }
@@ -126,7 +119,6 @@ int turning_move(int error, int prevError, int f_vel, int step)
 	else
 	{
 		int velDiff = error * propGain + (error - prevError) * derivGain;
-		std::cout << "Velocity Difference: " << velDiff << std::endl;
 		set_vel(f_vel, velDiff);
 	}
 	return 0;
@@ -160,33 +152,25 @@ bool detectLine()
 
 int rotate_left() {
 	for (int i = 0; i < 13; i++) {
-		turning_move(0, 25, 5, 1);
-		update_sim(100);
+		turning_move(0, 25, SLOW_VEL, 1);
+		update_sim(update_speed);
 	}
-/*	while (offset_calc(false) > 10 || offset_calc(false) < -10) {
-		turning_move(0, 25, 5, 1);
-		update_sim(100);
-	}*/
 	turning_move(0, 0, 0, 1);
 	return 0;
 }
 int rotate_right() {
 	std::cout << "Vert Offset: " << offset_calc(false) << std::endl;
 	for (int i = 0; i < 13; i++) {
-		turning_move(0, -25, 5, 1);
-		update_sim(100);
+		turning_move(0, -25, SLOW_VEL, 1);
+		update_sim(update_speed);
 	}
-/*	while (offset_calc(false) > 10 || offset_calc(false) < -10) {
-		turning_move(0, -25, 5, 1);
-		update_sim(100);
-	}*/
 	turning_move(0, 0, 0, 1);
 	return 0;
 }
 int skip_turn() {
 	for (int i = 0; i < 13; i++) {
-		turning_move(0, 0, 5, 0);
-		update_sim(100);
+		turning_move(0, 0, SLOW_VEL, 0);
+		update_sim(update_speed);
 	}
 	turning_move(0, 0, 0, 1);
 	return 0;
@@ -194,7 +178,7 @@ int skip_turn() {
 int rotate_back() {
 	for (int i = 0; i < 26; i++) {
 		turning_move(0, 25, 0, 1);
-		update_sim(100);
+		update_sim(update_speed);
 	}
 	turning_move(0, 0, 0, 1);
 	return 0;
@@ -204,46 +188,39 @@ int chal() {
 	int i = 0;
 	int curError = 0;
 	int turns = 0;
-	while (offset_calc(true) > -51 || !hasColour(1)) {
-		std::cout<<turns<<std::endl;
-		if (turns == 7 && side_offset(false) > camera_image.height / 2 - 10) {
+	while (offset_calc(BOT) > OUT_VERT || !hasColour(1)) {
+		// after robot turns 7 times break the left hand rule and turn right
+		if (turns == 7 && side_offset(RIGHT) > camera_image.height / 2 - DETECT_RANGE) {
 			std::cout<<"finish"<<std::endl;
 			rotate_right();
 			skip_turn();
 		}
-		else if (side_offset(true) > camera_image.height / 2 - 10 ) {
+		else if (side_offset(LEFT) > camera_image.height / 2 - DETECT_RANGE ) {
 			turns++;
 			std::cout<<"left"<<std::endl;
 			rotate_left();
 		}
-		else if (offset_calc(false) > -51 && side_offset(false) > camera_image.height / 2 - 10 && side_offset(true) == -41 ) {
+		else if (offset_calc(TOP) > OUT_VERT && side_offset(RIGHT) > camera_image.height / 2 - DETECT_RANGE && side_offset(LEFT) == OUT_SIDE ) {
 			std::cout<<"forward"<<std::endl;
 			turns++;
 			skip_turn();
 		}
-		else if (side_offset(false) > camera_image.height / 2 - 10 && side_offset(true) == -41) {
+		else if (side_offset(RIGHT) > camera_image.height / 2 - DETECT_RANGE && side_offset(LEFT) == OUT_SIDE) {
 			std::cout<<"right"<<std::endl;
 			turns++;
 			rotate_right();
 		}
-		else if (offset_calc(true) == -51 && offset_calc(false) == -51) {
+		else if (offset_calc(BOT) == OUT_VERT && offset_calc(TOP) == OUT_VERT) {
 			std::cout<<"end"<<std::endl;
-			if (offset_calc(true) == -51) {
-				turns++;
-				rotate_back();
-			}
-			
+			turns++;
+			rotate_back();
 		}
 		else {
 			prevError = curError;
-			curError = offset_calc(true);
-			curError = (curError == -51) ? 0 : curError;
-			if (true)
-				turning_move(prevError, curError, 10, i);
-			else
-				turning_move(0, 0, -10, i);
+			curError = (offset_calc(BOT) == OUT_VERT) ? 0 : offset_calc(BOT);
+			turning_move(prevError, curError, FAST_VEL, i);
 			i++;
-			update_sim(100);
+			update_sim(update_speed);
 		}
 	}
 	return 0;
@@ -254,42 +231,35 @@ int comp() {
 	int i = 0;
 	int curError = 0;
 	
-	while (offset_calc(true) > -51 || !hasColour(2)) {
-		if (side_offset(true) > camera_image.height / 2 - 10) {
+	while (offset_calc(BOT) > OUT_VERT || !hasColour(2)) {
+		if (side_offset(LEFT) > camera_image.height / 2 - DETECT_RANGE) {
 			std::cout<<"left"<<std::endl;
 			rotate_left();
 		}
-		else if (offset_calc(false) > -51 && side_offset(false) > camera_image.height / 2 - 10 && side_offset(true) == -51 ) {
+		else if (offset_calc(TOP) > OUT_VERT && side_offset(RIGHT) > camera_image.height / 2 - DETECT_RANGE && side_offset(LEFT) == OUT_SIDE) {
 			std::cout<<"forward"<<std::endl;
 			skip_turn();
 		}
-		else if (side_offset(false) > camera_image.height / 2 - 10 && side_offset(true) == -51) {
+		else if (side_offset(RIGHT) > camera_image.height / 2 - DETECT_RANGE && side_offset(LEFT) == OUT_SIDE) {
 			std::cout<<"right"<<std::endl;
 			rotate_right();
 		}
-		else if (offset_calc(true) == -51 && offset_calc(false) == -51) {
+		else if (offset_calc(BOT) == OUT_VERT && offset_calc(TOP) == OUT_VERT) {
 			std::cout<<"end"<<std::endl;
-			if (offset_calc(true) == -51) {
-			
 			rotate_back();
-		}
-			
 		}
 		else {
 			prevError = curError;
-			curError = offset_calc(true);
-			curError = (curError == -51) ? 0 : curError;
-			if (true)
-				turning_move(prevError, curError, 5, i);
-			else
-				turning_move(0, 0, -10, i);
+			curError = (offset_calc(BOT) == OUT_VERT) ? 0 : offset_calc(BOT);
+			turning_move(prevError, curError, 8, i);
 			i++;
-			update_sim(100);
+			update_sim(update_speed);
 		}
 	}
-	while (offset_calc(true) < -camera_image.width / 2) {
-		turning_move(0, 0, 10, 0);
-		update_sim(100);
+	// after robot reaches the blue marker, keep going forward untill it sees the line again
+	while (offset_calc(BOT) < -camera_image.width / 2) {
+		turning_move(0, 0, FAST_VEL, 0);
+		update_sim(update_speed);
 	}
 	chal();
 	return 0;
@@ -301,22 +271,22 @@ int core()
 	int i = 0;
 	int curError = 0;
 
-	while (offset_calc(true) > -camera_image.width / 2 -1)
+	while (offset_calc(BOT) > OUT_VERT || !hasColour(0))
 	{
 		prevError = curError;
-		curError = offset_calc(true);
+		curError = offset_calc(BOT);
 		
 		if (hasColour(3))
-			turning_move(prevError, curError, 10, i);
+			turning_move(prevError, curError, FAST_VEL, i);
 		else
-			turning_move(0, 0, -10, i);
+			turning_move(0, 0, -FAST_VEL, i);
 		i++;
-		std::cout<<(curError - prevError)<<std::endl;
-		update_sim(100);
+		update_sim(update_speed);
 	}
-	while (offset_calc(true) < -camera_image.width / 2) {
-		turning_move(0, 0, 10, 0);
-		update_sim(100);
+	// after robot reaches the red marker, keep going forward untill it sees the line again
+	while (offset_calc(BOT) == OUT_VERT) {
+		turning_move(0, 0, FAST_VEL, 0);
+		update_sim(update_speed);
 	}
 	comp();
 	return 0;
@@ -327,7 +297,6 @@ int main()
 	std::cout << "start simulation..." << std::endl;
 	init(110,160,15*3.14159/180.0); // start of core
 	// init(1880, 640, 90 * M_PI / 180.0); // start of completion
-
 	core();
 
 	return 0;
