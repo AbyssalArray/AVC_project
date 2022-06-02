@@ -12,8 +12,8 @@ int prevError = 0;
 int minCol = 30;
 int update_speed = 100;
 
-const int OUT_SIDE = -camera_image.height / 2 - 1;
-const int OUT_VERT = -camera_image.width / 2 - 1;
+int OUT_SIDE = -camera_image.height / 2 - 1;
+int OUT_VERT = -camera_image.width / 2 - 1;
 const bool LEFT = true;
 const bool RIGHT = false;
 const bool TOP = false;
@@ -297,6 +297,8 @@ int main()
 	std::cout << "start simulation..." << std::endl;
 	init(110,160,15*3.14159/180.0); // start of core
 	// init(1880, 640, 90 * M_PI / 180.0); // start of completion
+	OUT_SIDE = -camera_image.height / 2 - 1;
+	OUT_VERT = -camera_image.width / 2 - 1;
 	core();
 
 	return 0;
